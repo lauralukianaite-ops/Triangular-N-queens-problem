@@ -4,8 +4,18 @@
 
 #define MAX_N 1001
 
-Queen found[queensPlaced];
+bool row[MAX_N];
+bool column[MAX_N];
+bool diagonal[MAX_N];
+Queen found[MAX_N];
 
+void printPositions(){
+    printf("N=%d M=%d\n");
+    for(int i = 0; i < m; i++){
+        printf("[ %d ; %d ]  ", found[i].r, found[i].c);
+    }
+    printf("\n");
+}
 
 bool backtrack(int rStart, int cStart, int queensPlaced, int n, int m){
     if(queensPlaced == m)
@@ -40,7 +50,7 @@ void solveProblem(int n, int m){
         row[i] = col[i] = diagonal[i] = false;
 
     if(backtrack(1,1,0,n,m))
-        print(n,m);
+        printPositions(n,m);
     
 }
 
