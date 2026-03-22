@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <math.h>
-#include "n-queen.h"
+#include "n_queen.h"
 
 int calculateQueens(int n){
     return floor((2*n+1)/3);
 }
+
 
 int main(){
     int test = 5;

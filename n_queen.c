@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include <stdio.h>
-#include "n-queen.h"
+#include <stdbool.h>
+#include "n_queen.h"
 
 #define MAX_N 1001
 
@@ -9,10 +9,10 @@ bool column[MAX_N];
 bool diagonal[MAX_N];
 Queen found[MAX_N];
 
-void printPositions(){
-    printf("N=%d M=%d\n");
+void printPositions(int n, int m){
+    printf("N=%d M=%d\n",n,m);
     for(int i = 0; i < m; i++){
-        printf("[ %d ; %d ]  ", found[i].r, found[i].c);
+        printf("[%d;%d] ", found[i].r, found[i].c);
     }
     printf("\n");
 }
@@ -47,7 +47,7 @@ bool backtrack(int rStart, int cStart, int queensPlaced, int n, int m){
 
 void solveProblem(int n, int m){
     for(int i = 0; i < MAX_N; i++)
-        row[i] = col[i] = diagonal[i] = false;
+        row[i] = column[i] = diagonal[i] = false;
 
     if(backtrack(1,1,0,n,m))
         printPositions(n,m);
