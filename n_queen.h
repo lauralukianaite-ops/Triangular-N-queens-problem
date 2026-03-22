@@ -5,7 +5,7 @@ typedef struct{
     int r,c;
 }Queen;
 
-void solveProblem(int n, int m);
+void solveProblem(int n, int m, int testNr);
 
 
 #endif
