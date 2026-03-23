@@ -11,23 +11,21 @@ bool column[MAX_N];
 bool diagonal[MAX_N];
 Queen found[MAX_N];
 
-bool isSolvable(int n, int m){
-    int queens = floor((2*n+1)/3);
-    if(m<=queens)
-        return true;
-    else
-        return false;
-}
-
-void printPositions(int n, int m, int testNr){
+void printPositions(int n, int m, int testNr, bool success){
     printf("Test%d: M=%d, N=%d;\n",testNr,n,m);
-    for(int i = 0; i < m; i++){
-        if(isSolvable(n,m))
+
+    if(success){
+        for(int i = 0; i < m; i++){
             printf("[%d;%d] ", found[i].r, found[i].c);
-        else
-            printf("No solution.");
+            if((i + 1) % 8 == 0)
+                printf("\n");
+        }
+    } 
+    else{
+        printf("No solution.");
     }
-    printf("\n");
+    
+    printf("\n\n");
 }
 
 bool backtrack(int rStart, int cStart, int queensPlaced, int n, int m){
@@ -58,13 +56,22 @@ bool backtrack(int rStart, int cStart, int queensPlaced, int n, int m){
     return false;
 }
 
+bool isSolvable(int n, int m){
+    int queens = floor((2*n+1)/3);
+    if(m<=queens)
+        return true;
+    else
+        return false;
+}
+
 void solveProblem(int n, int m, int testNr){
     for(int i = 0; i < MAX_N; i++)
         row[i] = column[i] = diagonal[i] = false;
 
-    if(isSolvable)
-        backtrack(1,1,0,n,m);
+    bool success = false;
+    if(isSolvable(n,m))
+        success = backtrack(1,1,0,n,m);
         
-    printPositions(n,m,testNr);
+    printPositions(n,m,testNr,success);
 }
 
