@@ -11,6 +11,6 @@ int main(){
     solveProblem(8,5,5);
     solveProblem(10,7,6);
     solveProblem(10,8,7);
-    solveProblem(14,9,8);
+    solveProblem(999,666,8);
     return 0;
 }

@@ -2,10 +2,15 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
+#include <time.h>
 #include "n_queen.h"
 
 #define MAX_N 1001
 
+clock_t startTime;
+double timeoutMs = 5000;
+bool limitReached = false;
+long long totalNodes = 0;
 bool row[MAX_N];
 bool column[MAX_N];
 bool diagonal[MAX_N];
@@ -29,6 +34,16 @@ void printPositions(int n, int m, int testNr, bool success){
 }
 
 bool backtrack(int rStart, int cStart, int queensPlaced, int n, int m){
+
+    totalNodes++;
+    if(totalNodes % 1000 == 0){
+        double duration = (double)(clock() - startTime) * 1000.0 / CLOCKS_PER_SEC;
+        if(duration > timeoutMs){
+            limitReached = true;
+            return false;
+        }
+    }
+
     if(queensPlaced == m)
         return true;
 
@@ -48,6 +63,9 @@ bool backtrack(int rStart, int cStart, int queensPlaced, int n, int m){
 
                     if(backtrack(r,c+1,queensPlaced + 1,n,m))
                         return true;
+
+                    if(limitReached)
+                        return false;
 
                     row[r] = column[c] = diagonal[d] = false;
                 }
