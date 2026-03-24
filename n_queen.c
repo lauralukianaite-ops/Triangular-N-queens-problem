@@ -21,10 +21,12 @@ Queen found[MAX_N];
 
 bool isSolvable(int n, int m){
     int queens = floor((2*n+1)/3);
-    if(m<=queens)
+    if(m<=queens){
         return true;
-    else
+    }
+    else{
         return false;
+    }
 }
 
 double calculateProgress(int r, int c, int n){
@@ -43,8 +45,9 @@ void printPositions(int n, int m, int testNr, bool success){
     else if(success){
         for(int i = 0; i < m; i++){
             printf("[%d;%d] ", found[i].r, found[i].c);
-            if((i + 1) % 8 == 0)
+            if((i + 1) % 8 == 0){
                 printf("\n");
+            }
         }
     } 
     else{
@@ -65,15 +68,18 @@ bool backtrack(int rStart, int cStart, int queensPlaced, int n, int m){
         }
     }
 
-    if(queensPlaced == m)
+    if(queensPlaced == m){
         return true;
+    }
 
     for(int r = rStart; r <= n; r++){
         int startC;
-        if(r == rStart)
+        if(r == rStart){
             startC = cStart;
-        else
+        }
+        else{
             startC = 1;
+        }
 
             for(int c = startC; c <= r; c++){
                 if(queensPlaced == 0){
@@ -87,11 +93,13 @@ bool backtrack(int rStart, int cStart, int queensPlaced, int n, int m){
                     found[queensPlaced].c = c;
                     row[r] = column[c] = diagonal[d] = true;
 
-                    if(backtrack(r,c+1,queensPlaced + 1,n,m))
+                    if(backtrack(r,c+1,queensPlaced + 1,n,m)){
                         return true;
+                    }
 
-                    if(limitReached)
+                    if(limitReached){
                         return false;
+                    }
 
                     row[r] = column[c] = diagonal[d] = false;
                 }
@@ -107,12 +115,14 @@ void solveProblem(int n, int m, int testNr){
     firstQueenR = 1;
     firstQueenC = 1;
 
-    for(int i = 0; i < MAX_N; i++)
+    for(int i = 0; i < MAX_N; i++){
         row[i] = column[i] = diagonal[i] = false;
+    }
 
     bool success = false;
-    if(isSolvable(n,m))
+    if(isSolvable(n,m)){
         success = backtrack(1,1,0,n,m);
+    }
         
     printPositions(n,m,testNr,success);
 }
